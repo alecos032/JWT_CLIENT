@@ -21,13 +21,13 @@ export class LoginService {
 
     let headersObj= new HttpHeaders(
       {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8', 
+      'No-Auth':'True',
       'Authorization': 'Basic '+btoa("pepe:sierra1*")});
       let options= {headers: headersObj};
     return this.http.post(`${this.API_URI}/oauth/token`,params.toString(),options);
   }
 
   getContet(){
-    let params= "access_token="+localStorage.getItem('userToken');
-    return this.http.get(`${this.API_URI}/demo?${params}`);
+    return this.http.get(`${this.API_URI}/demo`);
   }
 }

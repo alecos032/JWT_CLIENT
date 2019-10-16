@@ -1,4 +1,4 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor{
 
         if(localStorage.getItem('userToken') != null){
             const clonedreq= req.clone({
-                headers: req.headers.set("Autorization","Bearer "+localStorage.getItem('userToken'))
+                headers: req.headers.set("Authorization","bearer "+localStorage.getItem('userToken'))
             });
             return next.handle(clonedreq).do( 
                 succ => { },
@@ -25,6 +25,6 @@ export class AuthInterceptor implements HttpInterceptor{
             );
         }else{
             this.router.navigateByUrl('/login');
-        }    
+        } 
     }
 }
